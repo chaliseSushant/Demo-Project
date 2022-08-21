@@ -23,11 +23,15 @@ class ProfileRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+
+        $rules =  [
             'name'=>'required',
-            'profile_picture'=>'required|file|mimes:jpg,jpeg,bmp,png',
             'phone_no'=>'required',
             'address'=>'required'
         ];
+        if($this->all('id') !=null)
+            $rules = array_merge($rules,['profile_picture'=>'file|mimes:jpg,jpeg,png']);
+
+        return $rules;
     }
 }
